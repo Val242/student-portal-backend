@@ -1,11 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { CreateClassDto } from './dto/create-class.dto';
 import { UpdateClassDto } from './dto/update-class.dto';
+import { DatabaseService } from 'src/database/database.service';
 
 @Injectable()
 export class ClassService {
+    constructor(private readonly databaseService: DatabaseService){}
+
   create(createClassDto: CreateClassDto) {
-    return 'This action adds a new class';
+    return this.databaseService.class.create({
+      data: createClassDto
+    })
   }
 
   findAll() {
