@@ -13,8 +13,8 @@ export class ClassService {
     })
   }
 
-  findAll() {
-    return `This action returns all class`;
+  findAllClasses() {
+    return this.databaseService.class.findMany()
   }
 
   findOne(id: number) {

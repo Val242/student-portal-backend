@@ -13,8 +13,8 @@ export class ClassController {
   }
 
   @Get()
-  findAll() {
-    return this.classService.findAll();
+  findAllClasses() {
+    return this.classService.findAllClasses();
   }
 
   @Get(':id')
