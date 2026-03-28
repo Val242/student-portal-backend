@@ -13,6 +13,17 @@ export class ClassService {
     })
   }
 
+  getUsersByClass(id: number){
+    return this.databaseService.class.findUnique({
+      where:{
+        id   
+      },
+      include:{
+        students: true
+      }
+    })
+  }
+
   findAllClasses() {
     return this.databaseService.class.findMany()
   }
@@ -29,3 +40,5 @@ export class ClassService {
     return `This action removes a #${id} class`;
   }
 }
+
+

@@ -17,9 +17,9 @@ export class ClassController {
     return this.classService.findAllClasses();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.classService.findOne(+id);
+  @Get(':id/users')
+  getUserByClass(@Param('id') id: string) {
+    return this.classService.getUsersByClass(+id);
   }
 
   @Patch(':id')
