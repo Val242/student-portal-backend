@@ -13,6 +13,17 @@ export class UsersService {
     })
   }
 
+    getNotesByUser(id: number){
+    return this.databaseService.user.findUnique({
+      where:{
+        id
+      },
+      include:{
+        notes: true
+    }
+    })
+  }
+
   findAll() {
     return `This action returns all users`;
   }
