@@ -22,6 +22,11 @@ export class ClassController {
     return this.classService.getUsersByClass(+id);
   }
 
+  @Get(':id/activity')
+  getActivitiesByClass(@Param('id') id: string){
+    return this.classService.getActivitiesByClass(+id)
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateClassDto: UpdateClassDto) {
     return this.classService.update(+id, updateClassDto);

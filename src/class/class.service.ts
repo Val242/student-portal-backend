@@ -24,6 +24,17 @@ export class ClassService {
     })
   }
 
+  getActivitiesByClass(id: number){
+    return this.databaseService.class.findUnique({
+      where:{
+       id 
+      },
+      include:{
+        activities: true
+      }
+    })
+  }
+
   findAllClasses() {
     return this.databaseService.class.findMany()
   }
