@@ -9,9 +9,10 @@ import { ActivityModule } from './activity/activity.module';
 import { NoteModule } from './note/note.module';
 import { UsersModule } from './users/users.module';
 import { ClassModule } from './class/class.module';
+import { AchievementModule } from './achievement/achievement.module';
 
 @Module({
-  imports: [DatabaseModule, SubjectModule, ScheduleItemModule, TaskModule, ActivityModule, NoteModule, UsersModule, ClassModule],
+  imports: [DatabaseModule, SubjectModule, ScheduleItemModule, TaskModule, ActivityModule, NoteModule, UsersModule, ClassModule, AchievementModule],
   controllers: [AppController],
   providers: [AppService],
 })

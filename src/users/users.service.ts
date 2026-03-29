@@ -24,6 +24,17 @@ export class UsersService {
     })
   }
 
+    getAchievementsByUser(id: number){
+    return this.databaseService.user.findUnique({
+      where:{
+        id
+      },
+      include:{
+        achievements: true
+    }
+    })
+  }
+
   findAll() {
     return `This action returns all users`;
   }

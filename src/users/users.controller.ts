@@ -22,6 +22,11 @@ export class UsersController {
     return this.usersService.getNotesByUser(+id);
   }
 
+  @Get(':id/achievements')
+  getAchievementsByUser(@Param('id') id: string) {
+    return this.usersService.getAchievementsByUser(+id);
+  }
+
 
   @Get(':id')
   findOne(@Param('id') id: string) {
