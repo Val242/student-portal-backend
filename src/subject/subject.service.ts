@@ -1,19 +1,27 @@
 import { Injectable } from '@nestjs/common';
 import { CreateSubjectDto } from './dto/create-subject.dto';
 import { UpdateSubjectDto } from './dto/update-subject.dto';
+import { DatabaseService } from 'src/database/database.service';
 
 @Injectable()
 export class SubjectService {
+  constructor(private readonly databaseService: DatabaseService){}
   create(createSubjectDto: CreateSubjectDto) {
-    return 'This action adds a new subject';
+    return this.databaseService.subject.create({
+      data: createSubjectDto
+    })
   }
 
   findAll() {
-    return `This action returns all subject`;
+    return this.databaseService.subject.findMany({})
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} subject`;
+    return this.databaseService.subject.findUnique({
+      where: {
+        id
+      }
+    })
   }
 
   update(id: number, updateSubjectDto: UpdateSubjectDto) {
