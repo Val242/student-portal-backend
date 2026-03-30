@@ -1,19 +1,28 @@
 import { Injectable } from '@nestjs/common';
 import { CreateScheduleItemDto } from './dto/create-schedule-item.dto';
 import { UpdateScheduleItemDto } from './dto/update-schedule-item.dto';
+import { DatabaseService } from 'src/database/database.service';
 
 @Injectable()
 export class ScheduleItemService {
+  constructor(private readonly databaseService: DatabaseService){}
+  
   create(createScheduleItemDto: CreateScheduleItemDto) {
-    return 'This action adds a new scheduleItem';
+    return this.databaseService.scheduleItem.create({
+      data: createScheduleItemDto
+    })
   }
 
   findAll() {
-    return `This action returns all scheduleItem`;
+    return this.databaseService.scheduleItem.findMany({})
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} scheduleItem`;
+    return this.databaseService.scheduleItem.findUnique({
+      where: {
+        id
+      }
+    })
   }
 
   update(id: number, updateScheduleItemDto: UpdateScheduleItemDto) {

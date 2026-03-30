@@ -26,8 +26,8 @@ model ScheduleItem {
   id        Int      @id @default(autoincrement())
   day       DayOfWeek
 
-  startTime String
-  endTime   String
+  startTime DateTime
+  endTime   DateTime
 
   subject   Subject  @relation(fields: [subjectId], references: [id])
   subjectId Int
