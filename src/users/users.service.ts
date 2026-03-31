@@ -36,11 +36,13 @@ export class UsersService {
   }
 
   findAll() {
-    return `This action returns all users`;
+    return this.databaseService.user.findMany({})
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} user`;
+    return this.databaseService.user.findUnique({
+      where:{id}
+    })
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
