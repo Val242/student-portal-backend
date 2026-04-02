@@ -7,10 +7,35 @@ import { DatabaseService } from 'src/database/database.service';
 export class UsersService {
   constructor(private readonly databaseService: DatabaseService){}
   
-  create(createUserDto: CreateUserDto) {
-    return this.databaseService.user.create({
+ async create(createUserDto: CreateUserDto) {
+    const user = await this.databaseService.user.create({
       data: createUserDto
     })
+
+    if(!user.classId){
+      return user
+    }
+    const tasks = await this.databaseService.task.findMany({
+      where:{
+        classId: createUserDto.classId
+      },
+      select:{
+        id: true
+      }
+    })
+
+    const userTaskData = tasks.map((task)=>
+        ({
+          userId: user.id,
+          taskId: task.id
+        })
+    )
+
+    await this.databaseService.userTask.createMany({
+      data: userTaskData
+    })
+
+    return user;
   }
 
     getNotesByUser(id: number){
@@ -53,3 +78,5 @@ export class UsersService {
     return `This action removes a #${id} user`;
   }
 }
+
+
