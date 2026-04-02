@@ -113,6 +113,7 @@ model User {
   email String
   image String?
   bio String?
+  passwordHash String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

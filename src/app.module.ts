@@ -11,10 +11,14 @@ import { UsersModule } from './users/users.module';
 import { ClassModule } from './class/class.module';
 import { AchievementModule } from './achievement/achievement.module';
 import { UserTaskModule } from './user-task/user-task.module';
+import { AuthController } from './auth/auth.controller';
+import { AuthService } from './auth/auth.service';
+import { AuthModule } from './auth/auth.module';
+
 
 @Module({
-  imports: [DatabaseModule, SubjectModule, ScheduleItemModule, TaskModule, ActivityModule, NoteModule, UsersModule, ClassModule, AchievementModule, UserTaskModule],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [DatabaseModule, SubjectModule, ScheduleItemModule, TaskModule, ActivityModule, NoteModule, UsersModule, ClassModule, AchievementModule, UserTaskModule, AuthModule,],
+  controllers: [AppController, AuthController],
+  providers: [AppService, AuthService],
 })
 export class AppModule {}
