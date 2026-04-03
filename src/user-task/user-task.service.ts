@@ -10,8 +10,12 @@ export class UserTaskService {
     return 'This action adds a new userTask';
   }
 
-  findAll() {
-    return `This action returns all userTask`;
+  findAllUserTask(id:number) {
+    return this.databaseService.userTask.findMany({
+      where:{
+        userId: id
+      }
+    })
   }
 
   findOne(id: number) {

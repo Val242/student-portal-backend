@@ -14,15 +14,15 @@ export class UserTaskController {
     return this.userTaskService.create(createUserTaskDto);
   }
 
-  @Get()
-  findAll() {
-    return this.userTaskService.findAll();
+  @Get(':id')
+  findAllUserTask(@Param('id') id: string) {
+    return this.userTaskService.findAllUserTask(+id);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.userTaskService.findOne(+id);
-  }
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.userTaskService.findOne(+id);
+  // }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUserTaskDto: UpdateUserTaskDto) {
