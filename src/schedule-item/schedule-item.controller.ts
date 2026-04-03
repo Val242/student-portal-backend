@@ -1,9 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { ScheduleItemService } from './schedule-item.service';
 import { CreateScheduleItemDto } from './dto/create-schedule-item.dto';
 import { UpdateScheduleItemDto } from './dto/update-schedule-item.dto';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('schedule-item')
+@UseGuards(JwtAuthGuard)
 export class ScheduleItemController {
   constructor(private readonly scheduleItemService: ScheduleItemService) {}
 
