@@ -16,12 +16,13 @@ import { AuthService } from './auth/auth.service';
 import { AuthModule } from './auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule } from '@nestjs/config';
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
 
 
 @Module({
   imports: [DatabaseModule, SubjectModule, ScheduleItemModule, TaskModule, ActivityModule, NoteModule, UsersModule, ClassModule, AchievementModule, UserTaskModule, AuthModule, JwtModule,    ConfigModule.forRoot({
       isGlobal: true,
-    }),],
+    }), CloudinaryModule,],
   controllers: [AppController, AuthController],
   providers: [AppService, AuthService],
 })

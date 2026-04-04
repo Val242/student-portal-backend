@@ -1,11 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Request, UploadedFile, BadRequestException, UseInterceptors } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
+import { FileInterceptor } from '@nestjs/platform-express';
+
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly usersService: UsersService, private cloudinaryService:CloudinaryService) {}
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
@@ -33,10 +36,24 @@ export class UsersController {
     return this.usersService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(+id, updateUserDto);
+  @Patch(':id/profile-picture')
+@Patch(':id/profile-picture')
+@UseInterceptors(FileInterceptor('file'))
+async updateProfilePic(
+  @Param('id') id: string,
+  @UploadedFile() file: Express.Multer.File
+) {
+  if (!file) {
+    throw new BadRequestException('File is required');
   }
+
+  const uploaded = await this.cloudinaryService.uploadFile(file);
+
+  return this.usersService.UploadProfilePic(
+    +id,
+    uploaded.secure_url // ✅ THIS is what matters
+  );
+}
 
   @Delete(':id')
   remove(@Param('id') id: string) {

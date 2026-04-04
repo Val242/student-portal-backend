@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { DatabaseService } from 'src/database/database.service';
@@ -69,6 +69,16 @@ export class UsersService {
       where:{id}
     })
   }
+
+ async UploadProfilePic(id: number, imageUrl: string) {
+  const user = await this.databaseService.user.findUnique({ where: { id } });
+  if (!user) throw new NotFoundException('User not found');
+
+  return this.databaseService.user.update({
+    where: { id },
+    data: { profilePicUrl: imageUrl }
+  });
+}
 
   update(id: number, updateUserDto: UpdateUserDto) {
     return `This action updates a #${id} user`;
