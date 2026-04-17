@@ -73,6 +73,7 @@ export class AuthService {
   }
 
     async login(user: any) {
+      console.log(`Secret key is ${process.env.JWT_SECRET_KEY}`)
       try {
         const payload = {sub: user.id, email: user.email}
   
