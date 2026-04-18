@@ -29,9 +29,9 @@ export class AuthController {
       return this.authService.login(user)
     }
 
-    @Get('user')
-     @UseGuards(JwtAuthGuard)
-    getUser(@Request() req:any){
-        return this.authService.findUserById(req.user)
-    }
+    // @Get('user')
+    //  @UseGuards(JwtAuthGuard)
+    // getUser(@Request() req:any){
+    //     return this.authService.findUserById(req.user)
+    // }
 }

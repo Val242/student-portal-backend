@@ -70,15 +70,22 @@ export class UsersService {
     })
   }
 
- async UploadProfilePic(id: number, imageUrl: string) {
-  const user = await this.databaseService.user.findUnique({ where: { id } });
-  if (!user) throw new NotFoundException('User not found');
+  // users.service.ts
+  async uploadProfilePic(currentUserId: number, imageUrl: string) {
+    // Optional: check if user exists
+    const user = await this.databaseService.user.findUnique({
+      where: { id: currentUserId }
+    });
 
-  return this.databaseService.user.update({
-    where: { id },
-    data: { profilePicUrl: imageUrl }
-  });
-}
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    return this.databaseService.user.update({
+      where: { id: currentUserId },
+      data: { profilePicUrl: imageUrl },
+    });
+  }
 
   update(id: number, updateUserDto: UpdateUserDto) {
     return `This action updates a #${id} user`;
