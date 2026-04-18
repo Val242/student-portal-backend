@@ -3,6 +3,7 @@ import { UserTaskService } from './user-task.service';
 import { CreateUserTaskDto } from './dto/create-user-task.dto';
 import { UpdateUserTaskDto } from './dto/update-user-task.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
 
 @Controller('user-task')
 @UseGuards(JwtAuthGuard)
@@ -14,9 +15,9 @@ export class UserTaskController {
     return this.userTaskService.create(createUserTaskDto);
   }
 
-  @Get(':id')
-  findAllUserTask(@Param('id') id: string) {
-    return this.userTaskService.findAllUserTask(+id);
+  @Get('my-task')
+  findAllUserTask(@CurrentUser() user:any) {
+    return this.userTaskService.findAllUserTask(user.id);
   }
 
   // @Get(':id')
