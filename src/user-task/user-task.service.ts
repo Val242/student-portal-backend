@@ -14,7 +14,15 @@ export class UserTaskService {
     return this.databaseService.userTask.findMany({
       where:{
         userId: id
+      },
+   include:{
+    task:{
+      select:{
+        title:true,
+        createdAt: true
       }
+    }
+   }
     })
   }
 

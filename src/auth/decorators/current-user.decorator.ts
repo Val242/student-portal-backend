@@ -13,5 +13,5 @@ export const CurrentUser = createParamDecorator(
 );
 
 
-//A factory function provided by NestJS to create custom decorators that can be used as parameters in controllers.
-//Gives access to the current request/response cycle (works with HTTP, WebSocket, RPC, etc.).
+// createParamDecorator: A factory function provided by NestJS to create custom decorators that can be used as parameters in controllers.
+//ExceutionContext: Gives access to the current request/response cycle (works with HTTP, WebSocket, RPC, etc.).
