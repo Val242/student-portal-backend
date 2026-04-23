@@ -13,7 +13,9 @@ export class ActivityService {
   }
 
   findAll() {
-    return `This action returns all activity`;
+    return this,this.databaseService.activity.findMany({
+      
+    })
   }
 
   findOne(id: number) {
