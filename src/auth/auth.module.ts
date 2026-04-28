@@ -21,7 +21,7 @@ import { DatabaseService } from 'src/database/database.service';
     signOptions: { expiresIn: '1h' },
   }),
 }),
-     DatabaseModule
+     DatabaseModule,
     ],
     controllers: [AuthController],
     providers: [AuthService, LocalStrategy, JwtStrategy]
