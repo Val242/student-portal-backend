@@ -87,7 +87,7 @@ export class AuthService {
         secret: process.env.JWT_SECRET_KEY,
         })   
            
-
+console.log('done')
         return{
         accessToken,
         refreshToken,
@@ -107,6 +107,12 @@ export class AuthService {
       }
 
 }
+
+      async logout(response: any) {
+    response.clearCookie('accessToken');
+    return { message: 'Logout successful' };
+  }
+
      findUserById(id: number) {
     return this.databaseService.user.findUnique({
       where:{id}

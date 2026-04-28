@@ -28,6 +28,7 @@ export class UsersController {
   // Get current logged-in user (Recommended)
   @Get('me')
   getMe(@CurrentUser() user: any) {
+    console.log("Getting me ")
     return this.usersService.findOne(user.id);
   }
 
