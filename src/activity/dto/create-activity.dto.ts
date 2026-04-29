@@ -9,6 +9,10 @@ export class CreateActivityDto {
   @IsOptional()
   description?: string;
 
+  @IsString()
+  @IsOptional()
+  icon?: string;
+
   @IsDateString()
   date: string;
 

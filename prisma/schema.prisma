@@ -100,6 +100,7 @@ model Activity {
   title       String
   description String?
   date        DateTime
+  icon String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

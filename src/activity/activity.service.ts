@@ -13,7 +13,7 @@ export class ActivityService {
   }
 
   findAll() {
-    return this,this.databaseService.activity.findMany({
+    return this.databaseService.activity.findMany({
       
     })
   }
@@ -23,7 +23,12 @@ export class ActivityService {
   }
 
   update(id: number, updateActivityDto: UpdateActivityDto) {
-    return `This action updates a #${id} activity`;
+    return this.databaseService.activity.update({
+      where: {
+        id: id
+      },
+         data: updateActivityDto,
+    })
   }
 
   remove(id: number) {
