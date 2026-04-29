@@ -68,6 +68,11 @@ async updateProfilePic(
   );
 }
 
+    @Patch('')
+    update( @CurrentUser() user: any, @Body() updateUserDto: UpdateUserDto) {
+      return this.usersService.update(user.id, updateUserDto);
+    }
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.usersService.remove(+id);

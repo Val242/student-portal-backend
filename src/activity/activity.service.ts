@@ -14,7 +14,9 @@ export class ActivityService {
 
   findAll() {
     return this.databaseService.activity.findMany({
-      
+        include: {
+    class: true, 
+  },
     })
   }
 
@@ -32,6 +34,10 @@ export class ActivityService {
   }
 
   remove(id: number) {
-    return `This action removes a #${id} activity`;
+    return this.databaseService.activity.delete({
+      where:{
+        id:id
+      }
+    })
   }
 }
