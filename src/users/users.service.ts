@@ -55,8 +55,10 @@ export class UsersService {
         id
       },
       include:{
-        achievements: true
+        achievements: true,
+        class: true
     }
+    
     })
   }
 
@@ -66,7 +68,8 @@ export class UsersService {
 
   findOne(id: number) {
     return this.databaseService.user.findUnique({
-      where:{id}
+      where:{id},
+      include:{class:true}
     })
   }
 
@@ -87,10 +90,16 @@ export class UsersService {
     });
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+async update(id: number, updateUserDto: UpdateUserDto) {
+  try {
+    return await this.databaseService.user.update({
+      where: { id },
+      data: updateUserDto,
+    });
+  } catch (error) {
+    throw new NotFoundException('User not found');
   }
-
+}
   remove(id: number) {
     return `This action removes a #${id} user`;
   }
