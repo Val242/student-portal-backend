@@ -13,9 +13,10 @@ export class AchievementService {
   }
 
   findAll() {
-    return `This action returns all achievement`;
+    return this.databaseService.achievement.findMany({
+    })
   }
-
+  
   findOne(id: number) {
     return `This action returns a #${id} achievement`;
   }

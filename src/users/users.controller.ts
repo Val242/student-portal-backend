@@ -70,6 +70,7 @@ async updateProfilePic(
 
     @Patch('')
     update( @CurrentUser() user: any, @Body() updateUserDto: UpdateUserDto) {
+      console.log("Entered update controller")
       return this.usersService.update(user.id, updateUserDto);
     }
 

@@ -17,7 +17,8 @@ export class NoteService {
 
 
   findAll() {
-    return `This action returns all note`;
+    return this.databaseService.note.findMany({
+    })
   }
 
   findOne(id: number) {
