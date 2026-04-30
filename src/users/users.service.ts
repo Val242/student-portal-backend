@@ -91,13 +91,16 @@ export class UsersService {
   }
 
 async update(id: number, updateUserDto: UpdateUserDto) {
+    console.log('DTO RECEIVED:', updateUserDto);
   try {
     return await this.databaseService.user.update({
       where: { id },
       data: updateUserDto,
     });
   } catch (error) {
-    throw new NotFoundException('User not found');
+     console.log('Prisma error:', error);
+  throw error;
+    // throw new NotFoundException('User not found');
   }
 }
   remove(id: number) {
