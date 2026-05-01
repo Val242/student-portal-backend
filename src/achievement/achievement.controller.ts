@@ -20,7 +20,7 @@ export class AchievementController {
     return this.achievementService.findAll();
   }
 
-    @Get('search')
+   @Get('search')
   async search(@Query() query: SearchAchievementDto) {
     return this.achievementService.search(query);
   }
