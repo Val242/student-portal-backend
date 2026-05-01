@@ -21,6 +21,8 @@ export class AchievementService {
   findOne(id: number) {
     return `This action returns a #${id} achievement`;
   }
+
+  
   async search(searchAchievementDto: SearchAchievementDto) {
     return this.databaseService.achievement.findMany({
       where: {

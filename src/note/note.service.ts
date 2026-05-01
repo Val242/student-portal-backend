@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateNoteDto } from './dto/create-note.dto';
 import { UpdateNoteDto } from './dto/update-note.dto';
 import { DatabaseService } from 'src/database/database.service';
+import { SearchNoteDto } from './dto/search-notes.dto';
 
 @Injectable()
 export class NoteService {
@@ -20,6 +21,17 @@ export class NoteService {
     return this.databaseService.note.findMany({
     })
   }
+
+    async search(searchNoteDto: SearchNoteDto) {
+      return this.databaseService.note.findMany({
+        where: {
+          title: {
+            contains: searchNoteDto.title,
+            mode: 'insensitive',
+          },
+        },
+      });
+    }
 
   findOne(id: number) {
     return `This action returns a #${id} note`;

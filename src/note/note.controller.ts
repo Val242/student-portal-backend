@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Query } from '@nestjs/common';
 import { NoteService } from './note.service';
 import { CreateNoteDto } from './dto/create-note.dto';
 import { UpdateNoteDto } from './dto/update-note.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { SearchNoteDto } from './dto/search-notes.dto';
 
 @Controller('note')
 @UseGuards(JwtAuthGuard)
@@ -17,6 +18,11 @@ export class NoteController {
   @Get()
   findAll() {
     return this.noteService.findAll();
+  }
+
+   @Get('search')
+  async search(@Query() query: SearchNoteDto) {
+    return this.noteService.search(query);
   }
 
   @Get(':id')
