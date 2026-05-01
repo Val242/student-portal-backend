@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateAchievementDto } from './dto/create-achievement.dto';
 import { UpdateAchievementDto } from './dto/update-achievement.dto';
 import { DatabaseService } from 'src/database/database.service';
+import { SearchAchievementDto } from './dto/search-achievement.dto';
 
 @Injectable()
 export class AchievementService {
@@ -20,6 +21,17 @@ export class AchievementService {
   findOne(id: number) {
     return `This action returns a #${id} achievement`;
   }
+  async search(searchAchievementDto: SearchAchievementDto) {
+    return this.databaseService.achievement.findMany({
+      where: {
+        title: {
+          contains: searchAchievementDto.title,
+          mode: 'insensitive',
+        },
+      },
+    });
+  }
+
 
   update(id: number, updateAchievementDto: UpdateAchievementDto) {
     return `This action updates a #${id} achievement`;

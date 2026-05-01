@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Query } from '@nestjs/common';
 import { AchievementService } from './achievement.service';
 import { CreateAchievementDto } from './dto/create-achievement.dto';
 import { UpdateAchievementDto } from './dto/update-achievement.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { SearchAchievementDto } from './dto/search-achievement.dto';
 
 @Controller('achievement')
 @UseGuards(JwtAuthGuard)
@@ -17,6 +18,11 @@ export class AchievementController {
   @Get()
   findAll() {
     return this.achievementService.findAll();
+  }
+
+    @Get('search')
+  async search(@Query() query: SearchAchievementDto) {
+    return this.achievementService.search(query);
   }
 
   @Get(':id')
